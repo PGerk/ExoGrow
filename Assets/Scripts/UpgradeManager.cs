@@ -182,7 +182,8 @@ public class UpgradeManager : MonoBehaviour
         }
         else if (upgradeNumber == 0) // Skip
         {
-            Debug.Log("Upgrade übersprungen.");
+            //Debug.Log("Upgrade übersprungen.");
+            playerShip.stats.shield = playerShip.stats.maxShield;
             ToggleCanvasOff();
             return;
         }

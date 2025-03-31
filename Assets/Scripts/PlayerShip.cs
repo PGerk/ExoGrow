@@ -62,6 +62,6 @@ public class PlayerShip : MonoBehaviour
 
     private void Update()
     {
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -10f, 10f), Mathf.Clamp(transform.position.y, -5f, 0f));
+        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -8f, 8f), Mathf.Clamp(transform.position.y, -5f, 0f));
     }
 }
