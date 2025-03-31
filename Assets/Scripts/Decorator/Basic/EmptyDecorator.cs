@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class EmptyDecorator : ShipAbilitiesBase
 {
+   /* public EmptyDecorator(ShipAbilitiesBase ability) : base(ability)
+    {
+        name = "Projectile Speed Upgrade";
+        description = "Upgrade your projectile speed.";
+    }*/
     public override void OnDamageTaken(float amount)
     {
         base.OnDamageTaken(amount);

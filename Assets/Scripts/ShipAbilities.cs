@@ -18,7 +18,7 @@ public class ShipAbilities : MonoBehaviour
     {
         if (baseAbilities == null)
         {
-            baseAbilities = new EmptyDecorator();
+            baseAbilities = new BaseAbility();
         }
 
         activeAbilities = baseAbilities;
@@ -76,14 +76,15 @@ public class ShipAbilities : MonoBehaviour
         }
 
     }
-    
+
     public void AddDecorator(ShipAbilitiesDecorator newAbility)
     {
-        newAbility.SetWrappedAbility(activeAbilities);
-        newAbility.Initialize(ship);
-        decorators.Add(newAbility);
-        activeAbilities = newAbility;
+        ShipAbilitiesDecorator freshDecorator = (ShipAbilitiesDecorator)System.Activator.CreateInstance(newAbility.GetType(), activeAbilities);
+        freshDecorator.Initialize(ship);
+        decorators.Add(freshDecorator);
+        activeAbilities = freshDecorator;
     }
+
 
 
     public void RemoveDecorator<T>() where T : ShipAbilitiesDecorator

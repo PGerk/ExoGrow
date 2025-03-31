@@ -21,7 +21,9 @@ public class UpgradeManager : MonoBehaviour
     {
         List<ShipAbilitiesDecorator> loadedDecorators = new List<ShipAbilitiesDecorator>();
 
-        ShipAbilitiesDecorator newDecorator = new ShieldRecharge(null);
+        ShipAbilitiesDecorator newDecorator = new DamageDecorator(null);
+        loadedDecorators.Add(newDecorator);
+        /*ShipAbilitiesDecorator newDecorator = new ShieldRecharge(null);
         loadedDecorators.Add(newDecorator);
 
 
@@ -36,7 +38,7 @@ public class UpgradeManager : MonoBehaviour
         newDecorator = new MoveSpeedDecorator(null);
         loadedDecorators.Add(newDecorator);
         newDecorator = new ProjectileSpeedDecorator(null);
-        loadedDecorators.Add(newDecorator);
+        loadedDecorators.Add(newDecorator);*/
 
         foreach (var decorator in loadedDecorators)
         {
@@ -140,16 +142,21 @@ public class UpgradeManager : MonoBehaviour
     public ShipAbilitiesDecorator GenerateRandomRegularDecorator()
     {
         int index = Random.Range(0, standardDecorators.Count);
-        return standardDecorators[index];
+        ShipAbilitiesDecorator original = standardDecorators[index];
+
+        // **Erzeuge eine neue Instanz des gleichen Typs!**
+        return (ShipAbilitiesDecorator)System.Activator.CreateInstance(original.GetType(), (ShipAbilitiesBase)null);
     }
+
 
     public ShipAbilitiesDecorator GenerateRandomSpecialUpgrade()
     {
         int index = Random.Range(0, specialDecorators.Count);
-        ShipAbilitiesDecorator chosen = specialDecorators[index];
-        //specialDecorators.RemoveAt(index); // Entfernen, damit es nicht doppelt gewählt wird
-        return chosen;
+        ShipAbilitiesDecorator original = specialDecorators[index];
+
+        return (ShipAbilitiesDecorator)System.Activator.CreateInstance(original.GetType(), (ShipAbilitiesBase)null);
     }
+
     public void UpgradeSelected(int upgradeNumber)
     {
         if (!selectingUpgrade) return;
