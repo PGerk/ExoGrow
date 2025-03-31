@@ -3,7 +3,7 @@ using UnityEngine;
 public class AttackSpeedDecorator : ShipAbilitiesDecorator
 {
     private bool hasAppliedBoost = false;
-    public AttackSpeedDecorator(ShipAbilitiesBase ability) : base(null)
+    public AttackSpeedDecorator(ShipAbilitiesBase ability) : base(ability)
     {
         name = "Attack Speed Upgrade";
         description = "Upgrade your attack speed.";
@@ -17,7 +17,7 @@ public class AttackSpeedDecorator : ShipAbilitiesDecorator
             owner.stats.attackSpeed += .1f;
             Debug.Log(name + " received!");
             Debug.Log(description);
-            Debug.Log("Attack speed is now " + owner.stats.damage);
+            Debug.Log("Attack speed is now " + owner.stats.attackSpeed);
             hasAppliedBoost = true;
         }
     }

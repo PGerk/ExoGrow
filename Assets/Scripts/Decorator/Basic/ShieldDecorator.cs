@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShieldDecorator : ShipAbilitiesDecorator
 {
     private bool hasAppliedBoost = false;
-    public ShieldDecorator(ShipAbilitiesBase ability) : base(null)
+    public ShieldDecorator(ShipAbilitiesBase ability) : base(ability)
     {
         name = "Shield Upgrade";
         description = "Upgrade the shield of your ship.";
@@ -17,7 +17,7 @@ public class ShieldDecorator : ShipAbilitiesDecorator
             owner.stats.shield += 1f;
             Debug.Log(name + " received!");
             Debug.Log(description);
-            Debug.Log("Shield is now " + owner.stats.damage);
+            Debug.Log("Shield is now " + owner.stats.shield);
             hasAppliedBoost = true;
         }
     }

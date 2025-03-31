@@ -5,9 +5,9 @@ using System.Collections;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> enemyPrefabs = new List<GameObject>();
-    private int maxWaveNumber;
-    private int currentWave = 1;
+    [SerializeField] private List<Wave> waves = new List<Wave>();
+    //private int maxWaveNumber;
+    private int currentWave = 0;
     private bool waveActive = false;
 
     private Vector2 minBounds = new Vector2(-10, 0);
@@ -19,19 +19,20 @@ public class WaveManager : MonoBehaviour
 
     public UpgradeManager upgradeManager;
 
-    private List<GameObject> activeEnemies = new List<GameObject>();
+    public GameObject enemyPrefab;
 
     void Start()
     {
         upgradeManager = GameObject.Find("Upgrade Manager").GetComponent<UpgradeManager>();
         //maxWaveNumber = waves.Count - 1;
         waveText.gameObject.SetActive(false);
-        StartCoroutine(StartWaveWithWarning(0));
+        GenerateNextWave();
+        StartCoroutine(StartWaveWithWarning(currentWave));
     }
 
     void Update()
     {
-        if (waveActive && activeEnemies.Count == 0)
+        if (waveActive && waves[currentWave].enemiesRemaining == 0)
         {
             StartCoroutine(WaveEnd(currentWave));
         }
@@ -39,13 +40,13 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator StartWaveWithWarning(int waveNumber)
     {
-        yield return StartCoroutine(DisplayWaveMessage("Wave " + (waveNumber) + " incoming!"));
-        WaveStart();
+        yield return StartCoroutine(DisplayWaveMessage("Wave " + (waveNumber+1) + " incoming!"));
+        WaveStart(waveNumber);
     }
 
-    /*private void WaveStart(int waveNumber)
+    private void WaveStart(int waveNumber)
     {
-        if (waveNumber <= maxWaveNumber)
+        /*if (waveNumber <= maxWaveNumber)
         {
             foreach (GameObject enemy in waves[waveNumber].enemies)
             {
@@ -55,61 +56,49 @@ public class WaveManager : MonoBehaviour
             }
             waveActive = true;
             //Debug.Log("Wave started with " + waves[currentWave].enemiesRemaining + " enemies in play!");
-        }
-    }*/
-
-    private void WaveStart()
-    {
-        int enemyCount = Mathf.RoundToInt(currentWave * 1.25f); // Mehr Gegner pro Welle
-
-        for (int i = 0; i < enemyCount; i++)
+        }*/
+        foreach (GameObject enemy in waves[waveNumber].enemies)
         {
-            GameObject enemyPrefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
             Vector3 position = RandomV3();
-            GameObject instantiatedEnemy = Instantiate(enemyPrefab, position, Quaternion.identity);
-
-            // Gegner-Upgrades generieren und zuweisen
-            int upgradeCount = Mathf.RoundToInt(currentWave * 1.5f);
-
-            for (int j = 0; j < upgradeCount; j++)
-            {
-                ShipAbilitiesDecorator upgrade = upgradeManager.GenerateRandomDecorator();
-                EnemyShip enemyComponent = instantiatedEnemy.GetComponent<EnemyShip>();
-
-                if (enemyComponent != null && upgrade != null)
-                {
-                    enemyComponent.ship.abilities.AddDecorator(upgrade);
-                    Debug.Log($"Enemy {enemyComponent.name} received upgrade: {upgrade.name}");
-                }
-
-            }
-
-
-            activeEnemies.Add(instantiatedEnemy);
+            GameObject instantiatedEnemy = Instantiate(enemy, position, Quaternion.identity);
+            waves[waveNumber].enemiesRemaining++;
         }
         waveActive = true;
     }
-
+    
     public void EnemyDown(GameObject enemy)
     {
-        //waves[currentWave].enemiesRemaining--;
+        waves[currentWave].enemiesRemaining--;
         //Debug.Log("Enemy " + enemy + " down!");
         //Debug.Log(waves[currentWave].enemiesRemaining + " enemies remaining.");
-        //waves[currentWave].enemies.Remove(enemy);
-        activeEnemies.Remove(enemy);
+        waves[currentWave].enemies.Remove(enemy);
+    }
+
+    private void GenerateNextWave()
+    {
+        Wave temp = new Wave();
+        int enemyCount = Mathf.RoundToInt((currentWave+1) * 1.25f);
+        //int upgradeCount = Mathf.RoundToInt((currentWave+1) * 1.5f);
+
+        for (int i = 0; i < enemyCount; i++)
+        {
+            temp.enemies.Add(enemyPrefab);
+        }
+
+        waves.Add(temp);
     }
 
     private IEnumerator WaveEnd(int waveNumber)
     {
         Debug.Log("Wave over");
         waveActive = false;
-        yield return StartCoroutine(DisplayWaveMessage("Wave " + (currentWave) + " defeated!"));
+        yield return StartCoroutine(DisplayWaveMessage("Wave " + (currentWave+1) + " defeated!"));
         upgradeManager.ShowUpgradeSelection();
         currentWave++;
-        if (currentWave <= maxWaveNumber)
-        {
-            StartCoroutine(StartWaveWithWarning(currentWave));
-        }
+
+        GenerateNextWave();
+
+        StartCoroutine(StartWaveWithWarning(currentWave));
     }
 
     private Vector3 RandomV3()
@@ -140,6 +129,6 @@ public class WaveManager : MonoBehaviour
 [System.Serializable]
 public class Wave
 {
-    public List<GameObject> enemies;
+    public List<GameObject> enemies = new List<GameObject>();
     public int enemiesRemaining = 0;
 }

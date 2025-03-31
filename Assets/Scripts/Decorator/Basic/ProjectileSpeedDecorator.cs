@@ -3,7 +3,7 @@ using UnityEngine;
 public class ProjectileSpeedDecorator : ShipAbilitiesDecorator
 {
     private bool hasAppliedBoost = false;
-    public ProjectileSpeedDecorator(ShipAbilitiesBase ability) : base(null)
+    public ProjectileSpeedDecorator(ShipAbilitiesBase ability) : base(ability)
     {
         name = "Projectile Speed Upgrade";
         description = "Upgrade your projectile speed.";
@@ -17,7 +17,7 @@ public class ProjectileSpeedDecorator : ShipAbilitiesDecorator
             owner.stats.additionalProjectileSpeed += .2f;
             Debug.Log(name + " received!");
             Debug.Log(description);
-            Debug.Log("Projectile speed is now " + owner.stats.damage);
+            Debug.Log("Projectile speed is now " + owner.stats.additionalProjectileSpeed);
             hasAppliedBoost = true;
         }
     }

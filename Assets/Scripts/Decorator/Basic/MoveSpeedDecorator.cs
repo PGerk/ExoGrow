@@ -3,7 +3,7 @@ using UnityEngine;
 public class MoveSpeedDecorator : ShipAbilitiesDecorator
 {
     private bool hasAppliedBoost = false;
-    public MoveSpeedDecorator(ShipAbilitiesBase ability) : base(null)
+    public MoveSpeedDecorator(ShipAbilitiesBase ability) : base(ability)
     {
         name = "Movement Speed Upgrade";
         description = "Upgrade your movement speed.";
@@ -17,7 +17,7 @@ public class MoveSpeedDecorator : ShipAbilitiesDecorator
             owner.stats.moveSpeed += .2f;
             Debug.Log(name + " received!");
             Debug.Log(description);
-            Debug.Log("Movement Speed is now " + owner.stats.damage);
+            Debug.Log("Movement Speed is now " + owner.stats.moveSpeed);
             hasAppliedBoost = true;
         }
     }

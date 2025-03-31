@@ -3,7 +3,7 @@ using UnityEngine;
 public class ArmorDecorator : ShipAbilitiesDecorator
 {
     private bool hasAppliedBoost = false;
-    public ArmorDecorator(ShipAbilitiesBase ability) : base(null)
+    public ArmorDecorator(ShipAbilitiesBase ability) : base(ability)
     {
         name = "Armor Upgrade";
         description = "Upgrade the armor of your ship.";
@@ -17,7 +17,7 @@ public class ArmorDecorator : ShipAbilitiesDecorator
             owner.stats.armor += 5f;
             Debug.Log(name + " received!");
             Debug.Log(description);
-            Debug.Log("Armor is now " + owner.stats.damage);
+            Debug.Log("Armor is now " + owner.stats.armor);
             hasAppliedBoost = true;
         }
     }

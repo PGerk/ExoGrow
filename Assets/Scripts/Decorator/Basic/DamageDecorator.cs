@@ -4,7 +4,7 @@ public class DamageDecorator : ShipAbilitiesDecorator
 {
     private bool hasAppliedBoost = false;
     //private List<string> names = new List<string>();
-    public DamageDecorator(ShipAbilitiesBase ability) : base(null)
+    public DamageDecorator(ShipAbilitiesBase ability) : base(ability)
     {
         //names.Add("")
         name = "Damage Upgrade";
