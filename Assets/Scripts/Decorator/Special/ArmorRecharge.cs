@@ -12,7 +12,7 @@ public class ArmorRecharge : ShipAbilitiesDecorator
 
     public override void OnUpdate()
     {
-        if (owner.stats.armor < owner.stats.maxArmor) owner.stats.armor += 0.001f;
+        if (owner.stats.armor < owner.stats.maxArmor) owner.stats.armor += 0.0001f;
     }
 
 }

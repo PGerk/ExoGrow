@@ -12,7 +12,7 @@ public class ShieldRecharge : ShipAbilitiesDecorator
 
     public override void OnUpdate()
     {
-        if (owner.stats.shield < owner.stats.maxShield) owner.stats.shield += 0.01f;
+        if (owner.stats.shield < owner.stats.maxShield) owner.stats.shield += 0.001f;
     }
 
 }

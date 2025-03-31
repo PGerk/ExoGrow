@@ -57,10 +57,19 @@ public class WaveManager : MonoBehaviour
             waveActive = true;
             //Debug.Log("Wave started with " + waves[currentWave].enemiesRemaining + " enemies in play!");
         }*/
+
+        int upgradeCount = Mathf.RoundToInt((currentWave + 1) * 1.5f);
+
         foreach (GameObject enemy in waves[waveNumber].enemies)
         {
             Vector3 position = RandomV3();
             GameObject instantiatedEnemy = Instantiate(enemy, position, Quaternion.identity);
+            ShipAbilities enemyAbilities = instantiatedEnemy.GetComponent<ShipAbilities>();
+
+            for (int i = 0; i < upgradeCount; i++)
+            {
+                enemyAbilities.AddDecorator(upgradeManager.GenerateRandomDecorator());
+            }
             waves[waveNumber].enemiesRemaining++;
         }
         waveActive = true;
@@ -78,7 +87,6 @@ public class WaveManager : MonoBehaviour
     {
         Wave temp = new Wave();
         int enemyCount = Mathf.RoundToInt((currentWave+1) * 1.25f);
-        //int upgradeCount = Mathf.RoundToInt((currentWave+1) * 1.5f);
 
         for (int i = 0; i < enemyCount; i++)
         {
