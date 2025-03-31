@@ -5,8 +5,8 @@ public class ArmorDecorator : ShipAbilitiesDecorator
     private bool hasAppliedBoost = false;
     public ArmorDecorator(ShipAbilitiesBase ability) : base(ability)
     {
-        name = "Armor Upgrade";
-        description = "Upgrade the armor of your ship.";
+        name = "Reactive Nanocomposite";
+        description = "Self-organizing alloys reinforce hull integrity.";
     }
 
     public override void Initialize(Ship ship)

@@ -5,8 +5,8 @@ public class ProjectileSpeedDecorator : ShipAbilitiesDecorator
     private bool hasAppliedBoost = false;
     public ProjectileSpeedDecorator(ShipAbilitiesBase ability) : base(ability)
     {
-        name = "Projectile Speed Upgrade";
-        description = "Upgrade your projectile speed.";
+        name = "Lorentz Accelerator";
+        description = "Electromagnetic fields propel munitions at lethal velocities.";
     }
 
     public override void Initialize(Ship ship)

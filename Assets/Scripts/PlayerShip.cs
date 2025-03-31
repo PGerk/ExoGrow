@@ -33,6 +33,8 @@ public class PlayerShip : MonoBehaviour
     {
         ShipAbilitiesDecorator deco = new QuitGameOnDeath(ship.abilities.getActiveAbilities());
         ship.abilities.AddDecorator(deco);
+        //deco = new RespawnDecorator(ship.abilities.getActiveAbilities());
+        //ship.abilities.AddDecorator(deco);
     }
 
     private void OnMove(InputValue inputValue)

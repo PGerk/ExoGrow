@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 8687531133640198923}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c191d12c0a842704c829c0aeabdab64f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseAbilities: {fileID: 11400000, guid: 3d487cc205f4e234abfd2e12104a99a2, type: 2}
 --- !u!114 &1780182755343364409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,3 +320,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c5a2a742f226b40819f953f9b2c7c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship: {fileID: 0}

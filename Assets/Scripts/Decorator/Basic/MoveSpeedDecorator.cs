@@ -5,8 +5,8 @@ public class MoveSpeedDecorator : ShipAbilitiesDecorator
     private bool hasAppliedBoost = false;
     public MoveSpeedDecorator(ShipAbilitiesBase ability) : base(ability)
     {
-        name = "Movement Speed Upgrade";
-        description = "Upgrade your movement speed.";
+        name = "Ion Surge Thrusters";
+        description = "High-efficiency propulsion systems boost maneuverability.";
     }
 
     public override void Initialize(Ship ship)

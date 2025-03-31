@@ -7,8 +7,8 @@ public class DamageDecorator : ShipAbilitiesDecorator
     public DamageDecorator(ShipAbilitiesBase ability) : base(ability)
     {
         //names.Add("")
-        name = "Damage Upgrade";
-        description = "Upgrade the damage caused by your regular attack.";
+        name = "Overcharged Plasma Channels";
+        description = "Weapons tap into unstable energy streams, amplifying destructive output.";
     }
 
     public override void Initialize(Ship ship)

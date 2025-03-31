@@ -51,7 +51,7 @@ public class ShipAbilities : MonoBehaviour
     public void Death()
     {
         activeAbilities.OnDeath(gameObject);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
     public void Abilities()
     {

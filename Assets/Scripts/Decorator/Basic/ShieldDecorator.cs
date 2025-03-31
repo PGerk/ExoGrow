@@ -5,8 +5,8 @@ public class ShieldDecorator : ShipAbilitiesDecorator
     private bool hasAppliedBoost = false;
     public ShieldDecorator(ShipAbilitiesBase ability) : base(ability)
     {
-        name = "Shield Upgrade";
-        description = "Upgrade the shield of your ship.";
+        name = "Quantum Barrier Matrix";
+        description = "Phase-shifting particles enhance shield durability.";
     }
 
     public override void Initialize(Ship ship)

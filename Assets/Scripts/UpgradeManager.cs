@@ -27,6 +27,10 @@ public class UpgradeManager : MonoBehaviour
         loadedDecorators.Add(newDecorator);
         newDecorator = new ShieldConverter(null);
         loadedDecorators.Add(newDecorator);
+        newDecorator = new HomingDecorator(null);
+        loadedDecorators.Add(newDecorator);
+        newDecorator = new RespawnDecorator(null);
+        loadedDecorators.Add(newDecorator);
 
         newDecorator = new DamageDecorator(null);
         loadedDecorators.Add(newDecorator);

@@ -5,8 +5,8 @@ public class AttackSpeedDecorator : ShipAbilitiesDecorator
     private bool hasAppliedBoost = false;
     public AttackSpeedDecorator(ShipAbilitiesBase ability) : base(ability)
     {
-        name = "Attack Speed Upgrade";
-        description = "Upgrade your attack speed.";
+        name = "Hyperfire Regulator";
+        description = "Optimized firing mechanisms reduce weapon cooldowns.";
     }
 
     public override void Initialize(Ship ship)
