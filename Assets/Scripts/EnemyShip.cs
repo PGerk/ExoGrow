@@ -18,6 +18,8 @@ public class EnemyShip : MonoBehaviour
     {
         ShipAbilitiesDecorator enemyBase = new BasicEnemyDecorator(ship.abilities.getActiveAbilities());
         ship.abilities.AddDecorator(enemyBase);
+        enemyBase = new DestroyOnDeath(ship.abilities.getActiveAbilities());
+        ship.abilities.AddDecorator(enemyBase);
     }
 
     private void Awake()

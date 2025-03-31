@@ -6,14 +6,18 @@ public abstract class ShipAbilitiesBase
     public bool isSpecial = false;
     public virtual void OnDamageTaken(float amount)
     {
-        if (owner.stats.shield > 0)
-        {
-            owner.stats.shield -= amount;
-        }
-        else
+        float shieldAbsorbed = Mathf.Min(owner.stats.shield, amount);
+        owner.stats.shield -= shieldAbsorbed;
+        amount -= shieldAbsorbed;
+
+        if (amount > 0)
         {
             owner.stats.armor -= amount;
-            if (owner.stats.armor <= 0) owner.abilities.Death();
+
+            if (owner.stats.armor <= 0)
+            {
+                owner.abilities.Death();
+            }
         }
     }
     public virtual void OnEnemyKilled(ShipStats enemy)
