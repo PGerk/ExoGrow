@@ -21,11 +21,12 @@ public class UpgradeManager : MonoBehaviour
     {
         List<ShipAbilitiesDecorator> loadedDecorators = new List<ShipAbilitiesDecorator>();
 
-        ShipAbilitiesDecorator newDecorator = new DamageDecorator(null);
+        ShipAbilitiesDecorator newDecorator = new ShieldRecharge(null);
         loadedDecorators.Add(newDecorator);
-        /*ShipAbilitiesDecorator newDecorator = new ShieldRecharge(null);
+        newDecorator = new ArmorRecharge(null);
         loadedDecorators.Add(newDecorator);
-
+        newDecorator = new ShieldConverter(null);
+        loadedDecorators.Add(newDecorator);
 
         newDecorator = new DamageDecorator(null);
         loadedDecorators.Add(newDecorator);
@@ -38,7 +39,7 @@ public class UpgradeManager : MonoBehaviour
         newDecorator = new MoveSpeedDecorator(null);
         loadedDecorators.Add(newDecorator);
         newDecorator = new ProjectileSpeedDecorator(null);
-        loadedDecorators.Add(newDecorator);*/
+        loadedDecorators.Add(newDecorator);
 
         foreach (var decorator in loadedDecorators)
         {
