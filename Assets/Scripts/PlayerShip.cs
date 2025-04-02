@@ -11,6 +11,11 @@ public class PlayerShip : MonoBehaviour
 
     public UpgradeManager upgradeManager;
 
+    private Camera mainCamera;
+    private Vector2 screenBounds;
+    private float playerWidth;
+    private float playerHeight;
+
     //public GameObject projectile;
 
     private void Awake()
@@ -26,7 +31,13 @@ public class PlayerShip : MonoBehaviour
     {
         while (!ship.abilities.IsInitialized()) ;
         DecorateBase();
+        mainCamera = Camera.main;
 
+        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
+
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        playerWidth = sr.bounds.extents.x;
+        playerHeight = sr.bounds.extents.y;
     }
 
     public void DecorateBase()
@@ -62,6 +73,11 @@ public class PlayerShip : MonoBehaviour
 
     private void Update()
     {
-        transform.position = new Vector2(Mathf.Clamp(transform.position.x, -8f, 8f), Mathf.Clamp(transform.position.y, -5f, 0f));
+        Vector3 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, -screenBounds.x + playerWidth, screenBounds.x - playerWidth);
+        //pos.y = Mathf.Clamp(pos.y, -screenBounds.y + playerHeight, screenBounds.y - playerHeight);
+        pos.y = Mathf.Clamp(pos.y, -screenBounds.y + (playerHeight/2), 0);
+        transform.position = pos;
+        //transform.position = new Vector2(Mathf.Clamp(transform.position.x, -10f, 10f), Mathf.Clamp(transform.position.y, -5f, 0f));
     }
 }

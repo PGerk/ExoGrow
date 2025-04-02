@@ -98,9 +98,12 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator WaveEnd(int waveNumber)
     {
-        Debug.Log("Wave over");
         waveActive = false;
+        
         yield return StartCoroutine(DisplayWaveMessage("Wave " + (currentWave+1) + " defeated!"));
+
+        if (IsHighscore(currentWave+1)) SetHighscore(waveNumber + 1);
+
         upgradeManager.ShowUpgradeSelection();
         currentWave++;
 
@@ -131,6 +134,23 @@ public class WaveManager : MonoBehaviour
         }
 
         waveText.gameObject.SetActive(false);
+    }
+
+    private bool IsHighscore (int wave)
+    {
+        int highscore = 0;
+        if (PlayerPrefs.HasKey("Highscore"))
+        {
+            highscore = PlayerPrefs.GetInt("Highscore");
+        }
+
+        return ( highscore < wave);
+    }
+
+    private void SetHighscore(int score)
+    {
+        PlayerPrefs.SetInt("Highscore", score);
+        PlayerPrefs.Save();
     }
 }
 

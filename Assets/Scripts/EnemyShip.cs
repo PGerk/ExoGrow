@@ -9,6 +9,9 @@ public class EnemyShip : MonoBehaviour
     private Vector2 maxBounds = new Vector2(10, 5);
     private Vector2 targetPosition;
 
+    private Camera mainCamera;
+    private Vector2 screenBounds;
+
     public Ship ship;
 
     //public WaveManager waveManager;
@@ -20,6 +23,12 @@ public class EnemyShip : MonoBehaviour
         ship.abilities.AddDecorator(enemyBase);
         enemyBase = new DestroyOnDeath(ship.abilities.getActiveAbilities());
         ship.abilities.AddDecorator(enemyBase);
+        mainCamera = Camera.main;
+        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
+        minBounds.x = -screenBounds.x;
+        maxBounds.x = screenBounds.x;
+        minBounds.y = 0;
+        maxBounds.y = screenBounds.y;
     }
 
     private void Awake()

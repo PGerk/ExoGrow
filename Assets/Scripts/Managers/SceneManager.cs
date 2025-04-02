@@ -49,7 +49,11 @@ public class SceneManagerGlobal : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Spiel wird beendet.");
-        Application.Quit();
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false; // Beendet das Spiel im Editor
+        #else
+            Application.Quit(); // Funktioniert im Build
+        #endif
     }
 
     private IEnumerator LoadSceneAsync(string sceneName)
