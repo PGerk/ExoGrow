@@ -24,7 +24,6 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         upgradeManager = GameObject.Find("Upgrade Manager").GetComponent<UpgradeManager>();
-        //maxWaveNumber = waves.Count - 1;
         waveText.gameObject.SetActive(false);
         GenerateNextWave();
         StartCoroutine(StartWaveWithWarning(currentWave));
@@ -46,18 +45,6 @@ public class WaveManager : MonoBehaviour
 
     private void WaveStart(int waveNumber)
     {
-        /*if (waveNumber <= maxWaveNumber)
-        {
-            foreach (GameObject enemy in waves[waveNumber].enemies)
-            {
-                Vector3 position = RandomV3();
-                GameObject instantiatedEnemy = Instantiate(enemy, position, Quaternion.identity);
-                waves[waveNumber].enemiesRemaining++;
-            }
-            waveActive = true;
-            //Debug.Log("Wave started with " + waves[currentWave].enemiesRemaining + " enemies in play!");
-        }*/
-
         int upgradeCount = Mathf.RoundToInt((currentWave + 1) * 1.5f);
 
         foreach (GameObject enemy in waves[waveNumber].enemies)
@@ -78,8 +65,6 @@ public class WaveManager : MonoBehaviour
     public void EnemyDown(GameObject enemy)
     {
         waves[currentWave].enemiesRemaining--;
-        //Debug.Log("Enemy " + enemy + " down!");
-        //Debug.Log(waves[currentWave].enemiesRemaining + " enemies remaining.");
         waves[currentWave].enemies.Remove(enemy);
     }
 

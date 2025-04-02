@@ -49,7 +49,6 @@ public class UpgradeManager : MonoBehaviour
         {
             if (decorator.isSpecial)
             {
-                // Falls ein `isSpecial`-Flag existiert
                 specialDecorators.Add(decorator);
                 Debug.Log("Added " + decorator.name + " to special decorators.");
             }

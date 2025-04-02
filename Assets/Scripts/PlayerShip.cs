@@ -11,12 +11,12 @@ public class PlayerShip : MonoBehaviour
 
     public UpgradeManager upgradeManager;
 
+    public Canvas pauseMenuCanvas;
+
     private Camera mainCamera;
     private Vector2 screenBounds;
     private float playerWidth;
     private float playerHeight;
-
-    //public GameObject projectile;
 
     private void Awake()
     {
@@ -38,14 +38,14 @@ public class PlayerShip : MonoBehaviour
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
         playerWidth = sr.bounds.extents.x;
         playerHeight = sr.bounds.extents.y;
+
+        pauseMenuCanvas.enabled = false;
     }
 
     public void DecorateBase()
     {
         ShipAbilitiesDecorator deco = new QuitGameOnDeath(ship.abilities.getActiveAbilities());
         ship.abilities.AddDecorator(deco);
-        //deco = new RespawnDecorator(ship.abilities.getActiveAbilities());
-        //ship.abilities.AddDecorator(deco);
     }
 
     private void OnMove(InputValue inputValue)
@@ -71,13 +71,27 @@ public class PlayerShip : MonoBehaviour
         ship.abilities.Abilities();
     }
 
+    private void OnPause()
+    {
+        if (!upgradeManager.selectingUpgrade)
+        {
+            if (!pauseMenuCanvas.enabled)
+            {
+                pauseMenuCanvas.enabled = true;
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                pauseMenuCanvas.enabled = false;
+                Time.timeScale = 1f;
+            }
+        }
+    }
     private void Update()
     {
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x, -screenBounds.x + playerWidth, screenBounds.x - playerWidth);
-        //pos.y = Mathf.Clamp(pos.y, -screenBounds.y + playerHeight, screenBounds.y - playerHeight);
         pos.y = Mathf.Clamp(pos.y, -screenBounds.y + (playerHeight/2), 0);
         transform.position = pos;
-        //transform.position = new Vector2(Mathf.Clamp(transform.position.x, -10f, 10f), Mathf.Clamp(transform.position.y, -5f, 0f));
     }
 }
