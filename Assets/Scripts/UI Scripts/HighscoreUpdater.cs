@@ -5,14 +5,23 @@ public class HighscoreUpdater : MonoBehaviour
 {
     TMP_Text highscoreText;
     int highscore = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        SetHighscore();
+    }
+
+    private void SetHighscore()
+    {
         if (PlayerPrefs.HasKey("Highscore"))
-        {
             highscore = PlayerPrefs.GetInt("Highscore");
-            highscoreText = GetComponent<TMP_Text>();
-            highscoreText.SetText("Highscore: Wave " + highscore);
-        }        
+        highscoreText = GetComponent<TMP_Text>();
+        highscoreText.SetText("Highscore: Wave " + highscore);
+    }
+
+    public void ResetHighscore()
+    {
+        PlayerPrefs.SetInt("Highscore", 0);
+        PlayerPrefs.Save();
+        SetHighscore();
     }
 }
