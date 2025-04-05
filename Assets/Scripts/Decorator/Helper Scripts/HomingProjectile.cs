@@ -23,7 +23,16 @@ public class HomingProjectile : MonoBehaviour
 
     private GameObject FindNearestEnemy()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemies;
+        if (projectile.owner.CompareTag("Player"))
+        {
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        }
+        else
+        {
+            enemies = GameObject.FindGameObjectsWithTag("Player");
+        }
         GameObject nearest = null;
         float minDistance = Mathf.Infinity;
 

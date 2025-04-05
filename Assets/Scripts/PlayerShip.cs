@@ -7,7 +7,7 @@ public class PlayerShip : MonoBehaviour
     private Rigidbody2D rb;
     private Ship ship;
 
-    private float lastShotTime = -Mathf.Infinity;
+    //private float lastShotTime = -Mathf.Infinity;
 
     public UpgradeManager upgradeManager;
 
@@ -46,6 +46,10 @@ public class PlayerShip : MonoBehaviour
     {
         ShipAbilitiesDecorator deco = new QuitGameOnDeath(ship.abilities.getActiveAbilities());
         ship.abilities.AddDecorator(deco);
+        //deco = new AutofireDecorator(ship.abilities.getActiveAbilities());
+        //ship.abilities.AddDecorator(deco);
+        //deco = new HomingDecorator(ship.abilities.getActiveAbilities());
+        //ship.abilities.AddDecorator(deco);
     }
 
     private void OnMove(InputValue inputValue)
@@ -54,7 +58,7 @@ public class PlayerShip : MonoBehaviour
         rb.linearVelocity = input * ship.stats.moveSpeed;
     }
 
-    private void OnAttack(InputValue input)
+    /*private void OnAttack(InputValue input)
     {
         float cooldown = 1.5f / ship.stats.attackSpeed;
 
@@ -64,6 +68,16 @@ public class PlayerShip : MonoBehaviour
             lastShotTime = Time.time;
         }
         
+    }*/
+
+    private void OnAttack(InputValue input)
+    {
+        //if (ship.stats.canFire)
+        //{
+            ship.abilities.Attack(ship.stats.projectilePrefab, transform, Vector2.up, ship.stats.additionalProjectileSpeed);
+            //ship.stats.canFire = false;
+        //}
+
     }
 
     private void OnAbility(InputValue input)

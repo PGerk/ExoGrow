@@ -42,7 +42,7 @@ public abstract class ShipAbilitiesDecorator : ShipAbilitiesBase
         {
             if (decorator == this)
             {
-                return true; // Verhindert Endlosrekursion
+                return true;
             }
             current = decorator.wrappedAbility;
         }
@@ -107,11 +107,11 @@ public abstract class ShipAbilitiesDecorator : ShipAbilitiesBase
 
     public override void Initialize(Ship ship)
     {
-        if (initialized) return; // Verhindert doppelte Initialisierung
+        if (initialized) return;
 
-        base.Initialize(ship); // Falls nötig
+        base.Initialize(ship);
         wrappedAbility?.Initialize(ship);
 
-        initialized = true; // Markiere als initialisiert
+        initialized = true;
     }
 }

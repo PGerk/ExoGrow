@@ -15,9 +15,6 @@ public class ProjectileSpeedDecorator : ShipAbilitiesDecorator
         if (!hasAppliedBoost)
         {
             owner.stats.additionalProjectileSpeed += .2f;
-            Debug.Log(name + " received!");
-            Debug.Log(description);
-            Debug.Log("Projectile speed is now " + owner.stats.additionalProjectileSpeed);
             hasAppliedBoost = true;
         }
     }

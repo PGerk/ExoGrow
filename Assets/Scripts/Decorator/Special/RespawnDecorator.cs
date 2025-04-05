@@ -4,11 +4,12 @@ using System.Collections;
 public class RespawnDecorator : ShipAbilitiesDecorator
 {
     private bool hasRespawned = false;
-    private float respawnTime = 1f; // Dauer der Unsichtbarkeit nach dem "Tod"
+    private float respawnTime = 1f;
     //private float fadeSpeed = 1f; // Geschwindigkeit, mit der das Schiff ein- und ausblendet
 
     public RespawnDecorator(ShipAbilitiesBase ability) : base(ability)
     {
+        isSpecial = true;
         name = "Theseus Override";
         description = "Upon destruction, the ship reassembles from backup components—technically the same vessel, depending on your definition of 'self.'";
     }

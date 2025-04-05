@@ -11,7 +11,7 @@ public class UpgradeManager : MonoBehaviour
     public List<ShipAbilitiesDecorator> acquiredUpgrades = new List<ShipAbilitiesDecorator>();
     private List<ShipAbilitiesDecorator> selectableDecorators = new List<ShipAbilitiesDecorator>();
 
-    public float specialDecoratorChance = .2f;
+    public float specialDecoratorChance = .1f;
     public Canvas canvasObject;
     public bool selectingUpgrade = false;
 
@@ -30,6 +30,8 @@ public class UpgradeManager : MonoBehaviour
         newDecorator = new HomingDecorator(null);
         loadedDecorators.Add(newDecorator);
         newDecorator = new RespawnDecorator(null);
+        loadedDecorators.Add(newDecorator);
+        newDecorator = new AutofireDecorator(null);
         loadedDecorators.Add(newDecorator);
 
         newDecorator = new DamageDecorator(null);
@@ -50,13 +52,13 @@ public class UpgradeManager : MonoBehaviour
             if (decorator.isSpecial)
             {
                 specialDecorators.Add(decorator);
-                Debug.Log("Added " + decorator.name + " to special decorators.");
+                //Debug.Log("Added " + decorator.name + " to special decorators.");
             }
 
             else
             {
                 standardDecorators.Add(decorator);
-                Debug.Log("Added " + decorator.name + " to regular decorators.");
+                //Debug.Log("Added " + decorator.name + " to regular decorators.");
             }
             
         }

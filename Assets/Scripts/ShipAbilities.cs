@@ -73,6 +73,8 @@ public class ShipAbilities : MonoBehaviour
             pro.damage += ship.stats.damage;
             pro.owner = gameObject;
             activeAbilities.OnAttack(pro);
+            ship.stats.canFire = false;
+            ship.stats.lastShotTime = Time.time;
         }
 
     }

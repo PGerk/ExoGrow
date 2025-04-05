@@ -55,7 +55,9 @@ public class WaveManager : MonoBehaviour
 
             for (int i = 0; i < upgradeCount; i++)
             {
-                enemyAbilities.AddDecorator(upgradeManager.GenerateRandomDecorator());
+                ShipAbilitiesDecorator deco = upgradeManager.GenerateRandomDecorator();
+                enemyAbilities.AddDecorator(deco);
+                Debug.Log("Enemy " + enemy.name + " has received " + deco.name);
             }
             waves[waveNumber].enemiesRemaining++;
         }
